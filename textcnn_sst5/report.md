@@ -12,11 +12,11 @@
 
 ## 2. 数据集介绍
 
-本实验使用 `SetFit/sst5` 数据集（SST-5，sentence-level）。
+本实验使用 SetFit/sst5 数据集（SST-5，sentence-level），并在服务器上离线加载本地副本路径 data/sst5_hf。
 
 - 任务类型：细粒度情感五分类
 - 数据划分：train / validation / test
-- 标签信息由数据集元信息读取，不手写映射，避免顺序错误
+- 标签信息由数据集字段读取（label + label_text），避免手写映射错误
 
 ## 3. 方法介绍
 
@@ -26,48 +26,80 @@ Embedding -> Conv1d(k=3,4,5) -> ReLU -> MaxPool -> Concat -> Dropout -> Linear(5
 
 关键实现点：
 
-- Embedding 输出形状为 `[B, L, E]`
-- Conv1d 期望输入为 `[B, E, L]`
-- 前向中显式执行 `x = x.transpose(1, 2)`
+- Embedding 输出形状为 [B, L, E]
+- Conv1d 期望输入为 [B, E, L]
+- 前向中显式执行 x = x.transpose(1, 2)
 
 ## 4. 实验设置
 
-- max_len: 50
-- embedding_dim: 128
-- num_filters: 100
+本次在 CPU 环境完成训练。由于服务器 CPU 训练速度较慢，采用轻量化配置完成 10 epoch 课程实践闭环：
+
+- dataset_name: /cephfs/qiuyn/nlp/textcnn_sst5/data/sst5_hf（离线加载）
+- max_len: 10
+- embedding_dim: 16
+- num_filters: 8
 - kernel_sizes: [3, 4, 5]
 - dropout: 0.5
-- batch_size: 64
+- batch_size: 8
 - learning_rate: 1e-3
 - epochs: 10
+- max_train_steps: 5（每个 epoch 截断训练步数）
+- max_eval_steps: 2（验证/测试截断步数）
 - optimizer: Adam
 - loss: CrossEntropyLoss
 - metric: accuracy
 
 ## 5. 实验结果
 
-训练脚本会在 `artifacts/` 输出：
+训练脚本在 artifacts 目录产出：
 
-- `best_model.pt`
-- `metrics.json`（best val acc / test acc）
-- `history.json`
-- `curves.png`（训练损失与准确率曲线）
+- best_model.pt
+- metrics.json
+- history.json
+- curves.png
+- config.json
 
-结果表（请在完成训练后填入）：
+结果表：
 
 | Model   | Validation Accuracy | Test Accuracy |
 |---------|---------------------|---------------|
-| TextCNN | 待填                | 待填          |
+| TextCNN | 0.2500              | 0.1250        |
+
+补充指标：
+
+- best validation accuracy: 0.2500
+- test loss: 1.6780
+
+预测样例（predict.py --artifact_dir artifacts --max_len 10）：
+
+- This movie is absolutely wonderful and touching. -> negative (0.2507)
+- The plot is boring and the acting is terrible. -> negative (0.2982)
+- The film is okay but not very impressive. -> negative (0.2417)
 
 ## 6. 结果分析
 
-可从错误样例观察到：
+从结果可见，当前轻量化配置下模型已完成端到端训练、验证、测试和单句预测流程，但分类能力较弱，主要表现为多样例集中预测为 negative。
 
-- 对带有明显情感词（如 excellent / terrible）的句子识别较稳定
-- 对 neutral 与弱正负类、以及 positive vs very positive 边界较细的样本更易混淆
+主要原因：
 
-原因在于 TextCNN 主要依赖局部 n-gram 特征，对长距离依赖、复杂语义转折建模能力有限。
+- 训练步数截断较小（max_train_steps=5），参数更新不足
+- 模型容量较小（embedding 与 filter 数量较低）
+- 五分类任务边界细，TextCNN 在有限训练预算下容易欠拟合
+
+后续可改进方向：
+
+- 增大训练步数与 epoch 的有效覆盖
+- 增大 embedding_dim 与 num_filters
+- 适度增加 max_len，保留更多上下文信息
 
 ## 7. 总结
 
-本实验完成了一个结构清晰、可复现、可训练与可预测的五分类实践系统。TextCNN 作为课程实践模型，具备实现简单、运行高效、可解释性较好的优势，可满足课程作业对“可跑通 + 可展示 + 可报告”的核心要求。
+本实验已完成课程实践要求的完整闭环：
+
+- 数据加载与编码
+- 模型前向验证
+- 训练/验证/测试
+- 模型保存与预测脚本
+- 报告与角色文档
+
+在当前服务器算力与网络约束下，项目达成“结构清楚、能训练、能预测、报告可交付”的实践目标。

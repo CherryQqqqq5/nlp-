@@ -12,7 +12,7 @@ from model import TextCNN
 from utils import compute_accuracy, save_json, set_seed
 
 
-def run_epoch(model, loader, criterion, optimizer, device, train_mode: bool):
+def run_epoch(model, loader, criterion, optimizer, device, train_mode: bool, max_steps: int = 0):
     model.train() if train_mode else model.eval()
 
     epoch_loss = 0.0
@@ -37,6 +37,8 @@ def run_epoch(model, loader, criterion, optimizer, device, train_mode: bool):
         epoch_loss += loss.item()
         epoch_acc += acc
         steps += 1
+        if max_steps > 0 and steps >= max_steps:
+            break
 
     if steps == 0:
         return 0.0, 0.0
@@ -56,6 +58,9 @@ def parse_args():
     parser.add_argument("--epochs", type=int, default=10)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--num_workers", type=int, default=0)
+    parser.add_argument("--device", type=str, default="cpu", choices=["cpu", "cuda", "auto"])
+    parser.add_argument("--max_train_steps", type=int, default=0)
+    parser.add_argument("--max_eval_steps", type=int, default=0)
     parser.add_argument("--artifact_dir", type=str, default="artifacts")
     return parser.parse_args()
 
@@ -75,7 +80,13 @@ def main():
         num_workers=args.num_workers,
     )
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    if args.device == "auto":
+        device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    elif args.device == "cuda":
+        device = torch.device("cuda")
+    else:
+        device = torch.device("cpu")
+    print("Using device:", device)
     model = TextCNN(
         vocab_size=len(bundle.vocab),
         embed_dim=args.embed_dim,
@@ -99,8 +110,24 @@ def main():
     print("Sanity check logits shape:", tuple(logits.shape))
 
     for epoch in range(1, args.epochs + 1):
-        train_loss, train_acc = run_epoch(model, bundle.train_loader, criterion, optimizer, device, train_mode=True)
-        val_loss, val_acc = run_epoch(model, bundle.val_loader, criterion, optimizer, device, train_mode=False)
+        train_loss, train_acc = run_epoch(
+            model,
+            bundle.train_loader,
+            criterion,
+            optimizer,
+            device,
+            train_mode=True,
+            max_steps=args.max_train_steps,
+        )
+        val_loss, val_acc = run_epoch(
+            model,
+            bundle.val_loader,
+            criterion,
+            optimizer,
+            device,
+            train_mode=False,
+            max_steps=args.max_eval_steps,
+        )
 
         history["train_loss"].append(train_loss)
         history["train_acc"].append(train_acc)
@@ -118,7 +145,15 @@ def main():
             torch.save(model.state_dict(), artifact_dir / "best_model.pt")
 
     model.load_state_dict(torch.load(artifact_dir / "best_model.pt", map_location=device))
-    test_loss, test_acc = run_epoch(model, bundle.test_loader, criterion, optimizer, device, train_mode=False)
+    test_loss, test_acc = run_epoch(
+        model,
+        bundle.test_loader,
+        criterion,
+        optimizer,
+        device,
+        train_mode=False,
+        max_steps=args.max_eval_steps,
+    )
     print(f"Test | loss={test_loss:.4f} acc={test_acc:.4f}")
 
     save_json(bundle.vocab, str(artifact_dir / "vocab.json"))

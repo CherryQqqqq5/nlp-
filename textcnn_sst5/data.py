@@ -1,9 +1,10 @@
 from collections import Counter
 from dataclasses import dataclass
-from typing import Dict, List, Tuple
+from pathlib import Path
+from typing import Dict, List
 
 import torch
-from datasets import load_dataset
+from datasets import load_dataset, load_from_disk
 from torch.utils.data import DataLoader, Dataset
 
 
@@ -34,20 +35,18 @@ def encode_text(text: str, vocab: Dict[str, int], max_len: int) -> List[int]:
 
 class SST5Dataset(Dataset):
     def __init__(self, texts: List[str], labels: List[int], vocab: Dict[str, int], max_len: int):
-        self.texts = texts
-        self.labels = labels
         self.vocab = vocab
         self.max_len = max_len
+        self.input_ids = [torch.tensor(encode_text(text, self.vocab, self.max_len), dtype=torch.long) for text in texts]
+        self.labels = [torch.tensor(int(label), dtype=torch.long) for label in labels]
 
     def __len__(self) -> int:
         return len(self.labels)
 
     def __getitem__(self, idx: int):
-        input_ids = encode_text(self.texts[idx], self.vocab, self.max_len)
-        label = int(self.labels[idx])
         return {
-            "input_ids": torch.tensor(input_ids, dtype=torch.long),
-            "labels": torch.tensor(label, dtype=torch.long),
+            "input_ids": self.input_ids[idx],
+            "labels": self.labels[idx],
         }
 
 
@@ -67,7 +66,10 @@ def create_dataloaders(
     batch_size: int = 64,
     num_workers: int = 0,
 ) -> DataBundle:
-    ds = load_dataset(dataset_name)
+    if Path(dataset_name).exists():
+        ds = load_from_disk(dataset_name)
+    else:
+        ds = load_dataset(dataset_name)
 
     train_texts = ds["train"]["text"]
     val_texts = ds["validation"]["text"]
@@ -78,7 +80,19 @@ def create_dataloaders(
     test_labels = ds["test"]["label"]
 
     vocab = build_vocab(train_texts, min_freq=min_freq)
-    label_names = ds["train"].features["label"].names
+    label_feature = ds["train"].features["label"]
+    if hasattr(label_feature, "names"):
+        label_names = label_feature.names
+    else:
+        id_to_text = {}
+        if "label_text" in ds["train"].features:
+            for row in ds["train"]:
+                idx = int(row["label"])
+                if idx not in id_to_text:
+                    id_to_text[idx] = row["label_text"]
+                if len(id_to_text) == len(set(train_labels)):
+                    break
+        label_names = [id_to_text[i] if i in id_to_text else str(i) for i in sorted(set(train_labels))]
 
     train_dataset = SST5Dataset(train_texts, train_labels, vocab, max_len)
     val_dataset = SST5Dataset(val_texts, val_labels, vocab, max_len)
