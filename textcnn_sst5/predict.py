@@ -11,7 +11,7 @@ def parse_args():
     parser = argparse.ArgumentParser()
     parser.add_argument("--text", type=str, default=None)
     parser.add_argument("--artifact_dir", type=str, default="artifacts")
-    parser.add_argument("--max_len", type=int, default=50)
+    parser.add_argument("--max_len", type=int, default=0, help="0 means use max_len from config.json")
     return parser.parse_args()
 
 
@@ -26,10 +26,10 @@ def build_model(vocab, label_names, artifact_dir):
         dropout=config["dropout"],
         pad_idx=vocab["<pad>"],
     )
-    state_dict = torch.load(f"{artifact_dir}/best_model.pt", map_location="cpu")
+    state_dict = torch.load(f"{artifact_dir}/best_model.pt", map_location="cpu", weights_only=False)
     model.load_state_dict(state_dict)
     model.eval()
-    return model
+    return model, config
 
 
 def predict_one(model, text, vocab, label_names, max_len=50):
@@ -50,18 +50,20 @@ def main():
     args = parse_args()
     vocab = load_json(f"{args.artifact_dir}/vocab.json")
     label_names = load_json(f"{args.artifact_dir}/label_names.json")
-    model = build_model(vocab, label_names, args.artifact_dir)
+    model, config = build_model(vocab, label_names, args.artifact_dir)
+
+    max_len = args.max_len if args.max_len > 0 else int(config.get("max_len", 50))
 
     if args.text:
-        result = predict_one(model, args.text, vocab, label_names, args.max_len)
+        result = predict_one(model, args.text, vocab, label_names, max_len)
         print(result)
     else:
-        print("Interactive mode. Type a sentence, or press Ctrl+C to exit.")
+        print(f"Interactive mode. max_len={max_len}. Type a sentence, or press Ctrl+C to exit.")
         while True:
             text = input(">> ").strip()
             if not text:
                 continue
-            result = predict_one(model, text, vocab, label_names, args.max_len)
+            result = predict_one(model, text, vocab, label_names, max_len)
             print(result)
 
 

@@ -1,0 +1,11 @@
+__pycache__/
+*.pyc
+
+# local logs
+artifacts_final/train.log
+
+# pretrained embeddings (too large for git)
+embeddings/
+
+# keep experiment metrics/docs but skip large checkpoints
+artifacts_hs/**/best_model.pt

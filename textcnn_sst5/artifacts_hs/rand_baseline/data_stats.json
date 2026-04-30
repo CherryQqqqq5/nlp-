@@ -1,0 +1,11 @@
+{
+  "train_samples": 8544,
+  "val_samples": 1101,
+  "test_samples": 2210,
+  "vocab_size": 8232,
+  "avg_train_len": 20.63494850187266,
+  "avg_val_len": 20.75840145322434,
+  "avg_test_len": 20.6868778280543,
+  "val_oov_ratio": 0.06803762852767448,
+  "test_oov_ratio": 0.06940373594645435
+}

@@ -1,8 +1,8 @@
-# 实验报告：TextCNN 在 SST-5 五分类情感分析中的应用
+# 实验报告：TextCNN 在 SST-5 五分类情感分析中的高分冲刺实验
 
 ## 1. 任务介绍
 
-本实验目标是构建一个句子级英文电影评论情感分类器。给定一条评论句子，模型需要预测其情感类别，标签为五分类：
+目标是完成句子级英文电影评论五分类：
 
 - 0: very negative
 - 1: negative
@@ -10,95 +10,143 @@
 - 3: positive
 - 4: very positive
 
-## 2. 数据集介绍
+本次不是单次跑通，而是建立“可复现 + 可对比 + 可分析”的实验体系。
 
-本实验使用 SetFit/sst5 数据集（SST-5，sentence-level），并在服务器上离线加载本地副本路径 data/sst5_hf。
+## 2. 数据集与数据统计
 
-- 任务类型：细粒度情感五分类
-- 数据划分：train / validation / test
-- 标签信息由数据集字段读取（label + label_text），避免手写映射错误
+使用离线副本 `data/sst5_hf`（来源 `SetFit/sst5`，train/validation/test）。
 
-## 3. 方法介绍
+当前实现的数据处理要点：
 
-模型采用 TextCNN，结构为：
+- tokenizer：正则切分（保留标点，兼容 `-lrb-/-rrb-`）
+- vocab：仅基于 train 构建，`min_freq=2`
+- 序列长度：`max_len=50`
 
-Embedding -> Conv1d(k=3,4,5) -> ReLU -> MaxPool -> Concat -> Dropout -> Linear(5 classes)
+由 `data_stats.json` 自动输出：
 
-关键实现点：
+- 样本量：train/val/test
+- 平均句长：`avg_train_len`, `avg_val_len`, `avg_test_len`
+- OOV 比例：`val_oov_ratio`, `test_oov_ratio`
 
-- Embedding 输出形状为 [B, L, E]
-- Conv1d 期望输入为 [B, E, L]
-- 前向中显式执行 x = x.transpose(1, 2)
+## 3. 方法
+
+### 3.1 TextCNN 结构
+
+`Embedding -> Conv1d(k=3,4,5) -> ReLU -> MaxPool -> Concat -> Dropout -> Linear(5)`
+
+关键维度变换：`[B, L, E] -> [B, E, L]`。
+
+### 3.2 Embedding 方案
+
+- `rand`: 随机初始化
+- `glove-static`: 加载 GloVe-100d，冻结 embedding
+- `glove-non-static`: 加载 GloVe-100d，允许微调
+
+GloVe 覆盖率（本词表）约为 `0.9967 (8205/8232)`。
+
+### 3.3 训练策略
+
+为抑制过拟合，训练脚本支持：
+
+- `AdamW` + `weight_decay`
+- `ReduceLROnPlateau`
+- `early stopping`
+- 可选 `grad_clip`
 
 ## 4. 实验设置
 
-本次在服务器 CPU 环境完成完整训练（不截断 step），采用标准配置：
+### 4.1 统一设置
 
-- dataset_name: data/sst5_hf（离线加载）
-- max_len: 50
-- embedding_dim: 128
-- num_filters: 100
-- kernel_sizes: [3, 4, 5]
-- dropout: 0.5
+- dataset_name: `data/sst5_hf`
 - batch_size: 64
-- learning_rate: 1e-3
-- epochs: 15
-- optimizer: Adam
-- loss: CrossEntropyLoss
-- metric: accuracy
+- max_len: 50
+- num_filters: 100
+- kernel_sizes: (3,4,5)
+- device: auto（本次运行在 CPU）
 
-输出目录：artifacts_final/
+### 4.2 本轮对比实验说明
+
+本轮为了快速完成完整实验矩阵，采用了固定 step budget：
+
+- `max_train_steps=8`
+- `max_eval_steps=4`
+
+该设置用于高效比较不同策略，不代表最终可提交的“长训练上限”。
 
 ## 5. 实验结果
 
-训练脚本在 artifacts_final 目录产出：
+### 5.1 Ablation 对比（单次）
 
-- best_model.pt
-- metrics.json
-- history.json
-- curves.png
-- config.json
+| Model | Best Val Acc | Test Acc | Test Loss | Macro-F1 |
+|---|---:|---:|---:|---:|
+| rand_baseline | 0.3242 | 0.2617 | 1.5939 | 0.2197 |
+| rand_reg (AdamW+ES+Scheduler) | 0.2891 | 0.2500 | 1.6020 | 0.1351 |
+| glove-static (100d) | 0.3516 | 0.3242 | 1.5066 | 0.1896 |
+| glove-non-static (100d) | 0.3164 | **0.3477** | 1.5391 | 0.1602 |
 
-结果表：
+结论：在本轮设置下，`glove-non-static` 取得最高 `test_acc`，`glove-static` 的 `best_val_acc` 更高。
 
-| Model   | Best Validation Accuracy | Test Accuracy | Test Loss |
-|---------|--------------------------|---------------|-----------|
-| TextCNN | 0.3769                   | 0.3511        | 1.4853    |
+### 5.2 多随机种子（glove-non-static）
 
-补充指标（来自 metrics.json 与 history.json）：
+Seeds: `13, 42, 3407`
 
-- best validation accuracy: 0.3769300636（第 4 个 epoch）
-- best validation loss: 1.4584（第 5 个 epoch）
-- final epoch(15) train_acc: 0.9171
-- final epoch(15) val_acc: 0.3669
+单次结果：
 
-## 6. 结果分析
+- seed13: test_acc=0.3789, macro_f1=0.1897
+- seed42: test_acc=0.3477, macro_f1=0.1602
+- seed3407: test_acc=0.3008, macro_f1=0.1301
 
-从曲线与指标可见：
+汇总（mean ± std）：
 
-- 训练集性能持续提升（train_acc 从 0.2654 升至 0.9171）
-- 验证集在第 4-5 轮达到峰值后进入波动并整体退化
-- 最终训练-验证存在较大泛化差距（约 0.55），呈现明显过拟合
+- `best_val_acc`: `0.3359 ± 0.0305`
+- `test_acc`: `0.3424 ± 0.0393`
+- `test_loss`: `1.5418 ± 0.0170`
+- `macro_f1`: `0.1600 ± 0.0298`
+- `weighted_f1`: `0.2104 ± 0.0360`
 
-说明：
+汇总文件：
 
-- TextCNN 在该设置下具备较强拟合能力，但对 SST-5 细粒度类别边界的泛化有限
-- 课程实践目标（能训练、能验证、能测试、能预测、可复现）已完成
+- `artifacts_hs/multiseed/glove_nonstatic_multiseed_summary.json`
 
-可行改进方向：
+## 6. 详细分析
 
-- 使用 early stopping（按验证集指标在第 4-5 轮附近停止）
-- 增加正则化（更高 dropout、权重衰减）
-- 引入预训练词向量或更强的上下文编码模型
-- 进行类别混淆矩阵分析，针对易混类别优化数据与损失设计
+### 6.1 混淆矩阵特征（以 seed13 为例）
 
-## 7. 总结
+从 `confusion_matrix.json` 看，模型显著偏向 `negative` 与 `positive` 两个中间强度类别：
 
-本实验完成了 SST-5 五分类 TextCNN 的完整工程闭环：
+- `very negative -> negative` 混淆突出
+- `very positive -> positive` 混淆突出
+- `neutral` 的召回非常低（容易被压到邻近极性）
 
-- 数据离线加载与编码
-- 模型训练与最佳模型保存
-- 验证/测试评估与曲线可视化
-- 单句预测脚本与可复现实验配置
+### 6.2 分类报告（seed13）
 
-最终测试准确率为 0.3511。结果表明，TextCNN 可作为课程实践的可靠基线，但在细粒度情感任务上需要更强正则化与建模能力以提升泛化表现。
+- `negative` F1 较高（0.5171）
+- `positive` F1 中等（0.4061）
+- `very negative / neutral / very positive` F1 很低
+
+说明模型更容易学习“中强度情感词”，但对细粒度边界和中性语义仍不足。
+
+### 6.3 错误样例现象
+
+`error_examples.json` 显示高频错误集中在：
+
+- 弱否定、轻度褒贬、转折句
+- 强度相邻类别（very negative vs negative；positive vs very positive）
+
+## 7. 结论与下一步
+
+本次冲刺完成了高分作业应有的核心形态：
+
+- 从单结果升级为实验矩阵
+- 引入预训练词向量与训练正则化
+- 增加混淆矩阵、分类报告、错误样例
+- 给出多 seed 的统计稳定性
+
+在当前 step budget 下，最佳单次 `test_acc=0.3477`，多 seed 均值 `0.3424 ± 0.0393`。
+
+下一步若继续提分，建议：
+
+1. 去掉 step 截断并进行完整 epoch 训练；
+2. 在 `glove-static/non-static` 上扩大超参搜索（lr, dropout, weight_decay）；
+3. 增加 `glove.6B.300d` 与更强 tokenization 对照；
+4. 针对 `neutral` 类别进行类别不平衡与难例策略优化。

@@ -1,0 +1,9 @@
+{
+  "best_epoch": 5,
+  "best_val_acc": 0.3515625,
+  "best_val_loss": 1.502417415380478,
+  "test_loss": 1.5065599381923676,
+  "test_acc": 0.32421875,
+  "glove_coverage": 0.9967201166180758,
+  "glove_found": 8205
+}

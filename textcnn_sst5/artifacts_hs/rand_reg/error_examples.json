@@ -1,0 +1,649 @@
+[
+  {
+    "true_label": "negative",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "no movement , no yuks , not much of anything .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3069126605987549
+      },
+      {
+        "text": "but what saves lives on the freeway does not necessarily make for persuasive viewing .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.28397300839424133
+      },
+      {
+        "text": "i do n't have an i am sam clue .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.26870593428611755
+      },
+      {
+        "text": "with generic sets and b-grade special effects , jason is about as convincing on the sci-fi front as tv 's defunct cleopatra 2525 .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.37251660227775574
+      },
+      {
+        "text": "it may be an easy swipe to take , but this barbershop just does n't make the cut .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3424377739429474
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "a gob of drivel so sickly sweet , even the eager consumers of moore 's pasteurized ditties will retch it up like rancid crème brûlée .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.30720004439353943
+      },
+      {
+        "text": "if this holiday movie is supposed to be a gift , somebody unwrapped it early , took out all the good stuff , and left behind the crap -lrb- literally -rrb- .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.31060224771499634
+      },
+      {
+        "text": "when a set of pre-shooting guidelines a director came up with for his actors turns out to be cleverer , better written and of considerable more interest than the finished film , that 's a bad sign .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3257054090499878
+      },
+      {
+        "text": "any one episode of the sopranos would send this ill-conceived folly to sleep with the fishes .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3111625611782074
+      },
+      {
+        "text": "the film would work much better as a video installation in a museum , where viewers would be free to leave .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.321480929851532
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "` how many more voyages can this limping but dearly-loved franchise survive ? '",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3088579773902893
+      },
+      {
+        "text": "so relentlessly wholesome it made me want to swipe something .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.339712530374527
+      },
+      {
+        "text": "a reasonably efficient mechanism , but it offers few surprises and finds its stars slumming in territory they should have avoided .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.24649159610271454
+      },
+      {
+        "text": "william shatner , as a pompous professor , is the sole bright spot ...",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.29128605127334595
+      },
+      {
+        "text": "d.j. qualls as indiana jones ?",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.33356162905693054
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "gangs of new york is an unapologetic mess , whose only saving grace is that it ends by blowing just about everything up .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2881006896495819
+      },
+      {
+        "text": "we never really feel involved with the story , as all of its ideas remain just that : abstract ideas .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2570267617702484
+      },
+      {
+        "text": "a turgid little history lesson , humourless and dull .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.25211530923843384
+      },
+      {
+        "text": "the ring just left me cold and wet like i was out in the seattle drizzle without rainwear .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.23545628786087036
+      },
+      {
+        "text": "lacking gravitas , macdowell is a placeholder for grief , and ergo this sloppy drama is an empty vessel .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.26345497369766235
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "this is one of polanski 's best films .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.30869749188423157
+      },
+      {
+        "text": "though the violence is far less sadistic than usual , the film is typical miike : fast , furious and full of off-the-cuff imaginative flourishes .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3101063370704651
+      },
+      {
+        "text": "the passions aroused by the discord between old and new cultures are set against the strange , stark beauty of the mideast desert , so lovingly and perceptively filmed that you can almost taste the desiccated air .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3433343172073364
+      },
+      {
+        "text": "it 's a pleasure to see seinfeld griping about the biz with buddies chris rock , garry shandling and colin quinn .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.448864221572876
+      },
+      {
+        "text": "as a singular character study , it 's perfect .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.39272797107696533
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "take care of my cat offers a refreshingly different slice of asian cinema .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.2948918044567108
+      },
+      {
+        "text": "jason x has cheesy effects and a hoary plot , but its macabre , self-deprecating sense of humor makes up for a lot .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.334377646446228
+      },
+      {
+        "text": "if your senses have n't been dulled by slasher films and gorefests , if you 're a connoisseur of psychological horror , this is your ticket .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.29186245799064636
+      },
+      {
+        "text": "most new movies have a bright sheen .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3095691502094269
+      },
+      {
+        "text": "steve irwin 's method is ernest hemmingway at accelerated speed and volume .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.28275319933891296
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "exquisitely acted and masterfully if preciously interwoven ... -lrb- the film -rrb- addresses in a fascinating , intelligent manner the intermingling of race , politics and local commerce .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3281647264957428
+      },
+      {
+        "text": "all the performances are top notch and , once you get through the accents , all or nothing becomes an emotional , though still positive , wrench of a sit .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.30572929978370667
+      },
+      {
+        "text": "much of the way , though , this is a refreshingly novel ride .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2557584345340729
+      },
+      {
+        "text": "the fact that the rookie is a nearly impeccable cinematic experience -- and a wonderful all-ages triumph besides -- is a miracle akin to the story the film portrays .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3209516704082489
+      },
+      {
+        "text": "goyer 's screenplay and direction are thankfully understated , and he has drawn excellent performances from his cast .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3145190477371216
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "this is really just another genre picture .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.26013216376304626
+      },
+      {
+        "text": "big deal !",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.24058334529399872
+      },
+      {
+        "text": "too sincere to exploit its subjects and too honest to manipulate its audience .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.28423452377319336
+      },
+      {
+        "text": "asia authors herself as anna battista , an italian superstar and aspiring directress who just happens to be her own worst enemy .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.30224210023880005
+      },
+      {
+        "text": "the marquis de sade could n't have been as dull a person as this film makes him out to be .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.36832866072654724
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "very positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "a thoughtful , moving piece that faces difficult issues with honesty and beauty .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.26507121324539185
+      },
+      {
+        "text": "both deeply weird and charmingly dear .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2640707790851593
+      },
+      {
+        "text": "a psychologically rich and suspenseful moral thriller with a stellar performance by al pacino .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.25154927372932434
+      },
+      {
+        "text": "an absorbing , slice-of-depression life that touches nerves and rings true .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2662198543548584
+      },
+      {
+        "text": "clever , brutal and strangely soulful movie .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.25684478878974915
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "very positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "a bit of an unwieldy mess .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.25759127736091614
+      },
+      {
+        "text": "a grim , flat and boring werewolf movie that refuses to develop an energy level .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2558041214942932
+      },
+      {
+        "text": "it tries too hard , and overreaches the logic of its own world .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.25416281819343567
+      },
+      {
+        "text": "has the feel of an unedited personal journal .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.262793630361557
+      },
+      {
+        "text": "an awkward and indigestible movie .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2520860731601715
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "neutral",
+    "count": 4,
+    "examples": [
+      {
+        "text": "extremely confusing .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.2350664883852005
+      },
+      {
+        "text": "topkapi this is not .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.239826500415802
+      },
+      {
+        "text": "the stories here suffer from the chosen format .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.24515672028064728
+      },
+      {
+        "text": "it settles for being merely grim .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.2795852720737457
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "very positive",
+    "count": 3,
+    "examples": [
+      {
+        "text": "somehow both wildly implausible and strangely conventional .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.30370214581489563
+      },
+      {
+        "text": "no question .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2858658730983734
+      },
+      {
+        "text": "both awful and appealing .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2219288945198059
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "very positive",
+    "count": 2,
+    "examples": [
+      {
+        "text": "ridiculous .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.2346380352973938
+      },
+      {
+        "text": "a sour , nasty offering .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.24363844096660614
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "very negative",
+    "count": 2,
+    "examples": [
+      {
+        "text": "no. .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.22070209681987762
+      },
+      {
+        "text": "no more .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.21645767986774445
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "neutral",
+    "count": 2,
+    "examples": [
+      {
+        "text": "hilarious , acidic brit comedy .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.24492621421813965
+      },
+      {
+        "text": "excellent acting and direction .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.251250296831131
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "neutral",
+    "count": 2,
+    "examples": [
+      {
+        "text": "extremely boring .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.2417059987783432
+      },
+      {
+        "text": "the story ... is moldy and obvious .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.23354683816432953
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "very negative",
+    "count": 1,
+    "examples": [
+      {
+        "text": "insomnia is involving .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.2562018036842346
+      }
+    ]
+  }
+]

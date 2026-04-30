@@ -1,0 +1,378 @@
+[
+  {
+    "true_label": "very negative",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "a gob of drivel so sickly sweet , even the eager consumers of moore 's pasteurized ditties will retch it up like rancid crème brûlée .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.29394108057022095
+      },
+      {
+        "text": "gangs of new york is an unapologetic mess , whose only saving grace is that it ends by blowing just about everything up .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3367711901664734
+      },
+      {
+        "text": "we never really feel involved with the story , as all of its ideas remain just that : abstract ideas .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.29427585005760193
+      },
+      {
+        "text": "if this holiday movie is supposed to be a gift , somebody unwrapped it early , took out all the good stuff , and left behind the crap -lrb- literally -rrb- .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3163418769836426
+      },
+      {
+        "text": "when a set of pre-shooting guidelines a director came up with for his actors turns out to be cleverer , better written and of considerable more interest than the finished film , that 's a bad sign .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3408617675304413
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "` how many more voyages can this limping but dearly-loved franchise survive ? '",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3281242251396179
+      },
+      {
+        "text": "so relentlessly wholesome it made me want to swipe something .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.2927347719669342
+      },
+      {
+        "text": "a reasonably efficient mechanism , but it offers few surprises and finds its stars slumming in territory they should have avoided .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.32411855459213257
+      },
+      {
+        "text": "william shatner , as a pompous professor , is the sole bright spot ...",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.320710152387619
+      },
+      {
+        "text": "d.j. qualls as indiana jones ?",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3057425916194916
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "this is one of polanski 's best films .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.28990957140922546
+      },
+      {
+        "text": "the passions aroused by the discord between old and new cultures are set against the strange , stark beauty of the mideast desert , so lovingly and perceptively filmed that you can almost taste the desiccated air .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3021460473537445
+      },
+      {
+        "text": "it 's a pleasure to see seinfeld griping about the biz with buddies chris rock , garry shandling and colin quinn .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3025202453136444
+      },
+      {
+        "text": "exquisitely acted and masterfully if preciously interwoven ... -lrb- the film -rrb- addresses in a fascinating , intelligent manner the intermingling of race , politics and local commerce .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.32039302587509155
+      },
+      {
+        "text": "as a singular character study , it 's perfect .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3088130056858063
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "the movie exists for its soccer action and its fine acting .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3278137743473053
+      },
+      {
+        "text": "jason x has cheesy effects and a hoary plot , but its macabre , self-deprecating sense of humor makes up for a lot .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.30271440744400024
+      },
+      {
+        "text": "if your senses have n't been dulled by slasher films and gorefests , if you 're a connoisseur of psychological horror , this is your ticket .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.34928134083747864
+      },
+      {
+        "text": "most new movies have a bright sheen .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.30557188391685486
+      },
+      {
+        "text": "steve irwin 's method is ernest hemmingway at accelerated speed and volume .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.2863365709781647
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "though the violence is far less sadistic than usual , the film is typical miike : fast , furious and full of off-the-cuff imaginative flourishes .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3099782168865204
+      },
+      {
+        "text": "all the performances are top notch and , once you get through the accents , all or nothing becomes an emotional , though still positive , wrench of a sit .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.31387361884117126
+      },
+      {
+        "text": "much monkeyfun for all .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3096168637275696
+      },
+      {
+        "text": "this is simply the most fun you 'll ever have with a documentary !",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.33146753907203674
+      },
+      {
+        "text": "it represents better-than-average movie-making that does n't demand a dumb , distracted audience .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.41261976957321167
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "any one episode of the sopranos would send this ill-conceived folly to sleep with the fishes .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3106054961681366
+      },
+      {
+        "text": "a dreary , incoherent , self-indulgent mess of a movie in which a bunch of pompous windbags drone on inanely for two hours ... a cacophony of pretentious , meaningless prattle .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.34707382321357727
+      },
+      {
+        "text": "a turgid little history lesson , humourless and dull .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.30301225185394287
+      },
+      {
+        "text": "lacking gravitas , macdowell is a placeholder for grief , and ergo this sloppy drama is an empty vessel .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3268038034439087
+      },
+      {
+        "text": "ridiculous .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.23180460929870605
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "this is really just another genre picture .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2937283515930176
+      },
+      {
+        "text": "a heavy reliance on cgi technology is beginning to creep into the series .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2884962260723114
+      },
+      {
+        "text": "sensitive though not quite revelatory documentary .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2827506959438324
+      },
+      {
+        "text": "aaliyah rarely dampens her diva persona enough to spark genuine chemistry with townsend .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3282601237297058
+      },
+      {
+        "text": "somehow both wildly implausible and strangely conventional .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.29141342639923096
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "a well acted and well intentioned snoozer .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.27345535159111023
+      },
+      {
+        "text": "george , hire a real director and good writers for the next installment , please .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.29995793104171753
+      },
+      {
+        "text": "sucking all the ` classic ' out of robert louis stevenson 's treasure island and filling the void with sci-fi video game graphics and disney-fied adolescent angst ...",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.29158076643943787
+      },
+      {
+        "text": "audiences conditioned to getting weepy over saucer-eyed , downy-cheeked moppets and their empathetic caretakers will probably feel emotionally cheated by the film 's tart , sugar-free wit .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3267934024333954
+      },
+      {
+        "text": "barely goes beyond comic book status .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.2729201316833496
+      }
+    ]
+  }
+]

@@ -1,4 +1,4 @@
-from typing import Iterable
+from typing import Iterable, Optional
 
 import torch
 import torch.nn as nn
@@ -15,9 +15,23 @@ class TextCNN(nn.Module):
         kernel_sizes: Iterable[int] = (3, 4, 5),
         dropout: float = 0.5,
         pad_idx: int = 0,
+        pretrained_embeddings: Optional[torch.Tensor] = None,
+        freeze_embedding: bool = False,
     ):
         super().__init__()
-        self.embedding = nn.Embedding(vocab_size, embed_dim, padding_idx=pad_idx)
+        if pretrained_embeddings is not None:
+            self.embedding = nn.Embedding.from_pretrained(
+                pretrained_embeddings,
+                freeze=freeze_embedding,
+                padding_idx=pad_idx,
+            )
+            if pretrained_embeddings.size(1) != embed_dim:
+                raise ValueError(
+                    f"embed_dim ({embed_dim}) must match pretrained dimension ({pretrained_embeddings.size(1)})"
+                )
+        else:
+            self.embedding = nn.Embedding(vocab_size, embed_dim, padding_idx=pad_idx)
+
         self.convs = nn.ModuleList(
             [nn.Conv1d(in_channels=embed_dim, out_channels=num_filters, kernel_size=k) for k in kernel_sizes]
         )
