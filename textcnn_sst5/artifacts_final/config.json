@@ -1,0 +1,17 @@
+{
+  "dataset_name": "data/sst5_hf",
+  "max_len": 50,
+  "min_freq": 2,
+  "embed_dim": 128,
+  "num_filters": 100,
+  "dropout": 0.5,
+  "batch_size": 64,
+  "lr": 0.001,
+  "epochs": 15,
+  "seed": 42,
+  "num_workers": 0,
+  "device": "auto",
+  "max_train_steps": 0,
+  "max_eval_steps": 0,
+  "artifact_dir": "artifacts_final"
+}

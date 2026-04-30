@@ -9,14 +9,15 @@ from tqdm import tqdm
 
 from data import create_dataloaders
 from model import TextCNN
-from utils import compute_accuracy, save_json, set_seed
+from utils import save_json, set_seed
 
 
 def run_epoch(model, loader, criterion, optimizer, device, train_mode: bool, max_steps: int = 0):
     model.train() if train_mode else model.eval()
 
-    epoch_loss = 0.0
-    epoch_acc = 0.0
+    total_loss = 0.0
+    total_correct = 0
+    total_count = 0
     steps = 0
 
     for batch in tqdm(loader, desc="train" if train_mode else "eval", leave=False):
@@ -29,20 +30,23 @@ def run_epoch(model, loader, criterion, optimizer, device, train_mode: bool, max
         with torch.set_grad_enabled(train_mode):
             logits = model(input_ids)
             loss = criterion(logits, labels)
-            acc = compute_accuracy(logits, labels)
             if train_mode:
                 loss.backward()
                 optimizer.step()
 
-        epoch_loss += loss.item()
-        epoch_acc += acc
+        batch_size = labels.size(0)
+        preds = torch.argmax(logits, dim=1)
+        total_loss += loss.item() * batch_size
+        total_correct += (preds == labels).sum().item()
+        total_count += batch_size
         steps += 1
+
         if max_steps > 0 and steps >= max_steps:
             break
 
-    if steps == 0:
+    if total_count == 0:
         return 0.0, 0.0
-    return epoch_loss / steps, epoch_acc / steps
+    return total_loss / total_count, total_correct / total_count
 
 
 def parse_args():
@@ -87,6 +91,7 @@ def main():
     else:
         device = torch.device("cpu")
     print("Using device:", device)
+
     model = TextCNN(
         vocab_size=len(bundle.vocab),
         embed_dim=args.embed_dim,

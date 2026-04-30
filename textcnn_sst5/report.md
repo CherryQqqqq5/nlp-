@@ -32,26 +32,26 @@ Embedding -> Conv1d(k=3,4,5) -> ReLU -> MaxPool -> Concat -> Dropout -> Linear(5
 
 ## 4. 实验设置
 
-本次在 CPU 环境完成训练。由于服务器 CPU 训练速度较慢，采用轻量化配置完成 10 epoch 课程实践闭环：
+本次在服务器 CPU 环境完成完整训练（不截断 step），采用标准配置：
 
-- dataset_name: /cephfs/qiuyn/nlp/textcnn_sst5/data/sst5_hf（离线加载）
-- max_len: 10
-- embedding_dim: 16
-- num_filters: 8
+- dataset_name: data/sst5_hf（离线加载）
+- max_len: 50
+- embedding_dim: 128
+- num_filters: 100
 - kernel_sizes: [3, 4, 5]
 - dropout: 0.5
-- batch_size: 8
+- batch_size: 64
 - learning_rate: 1e-3
-- epochs: 10
-- max_train_steps: 5（每个 epoch 截断训练步数）
-- max_eval_steps: 2（验证/测试截断步数）
+- epochs: 15
 - optimizer: Adam
 - loss: CrossEntropyLoss
 - metric: accuracy
 
+输出目录：artifacts_final/
+
 ## 5. 实验结果
 
-训练脚本在 artifacts 目录产出：
+训练脚本在 artifacts_final 目录产出：
 
 - best_model.pt
 - metrics.json
@@ -61,45 +61,44 @@ Embedding -> Conv1d(k=3,4,5) -> ReLU -> MaxPool -> Concat -> Dropout -> Linear(5
 
 结果表：
 
-| Model   | Validation Accuracy | Test Accuracy |
-|---------|---------------------|---------------|
-| TextCNN | 0.2500              | 0.1250        |
+| Model   | Best Validation Accuracy | Test Accuracy | Test Loss |
+|---------|--------------------------|---------------|-----------|
+| TextCNN | 0.3769                   | 0.3511        | 1.4853    |
 
-补充指标：
+补充指标（来自 metrics.json 与 history.json）：
 
-- best validation accuracy: 0.2500
-- test loss: 1.6780
-
-预测样例（predict.py --artifact_dir artifacts --max_len 10）：
-
-- This movie is absolutely wonderful and touching. -> negative (0.2507)
-- The plot is boring and the acting is terrible. -> negative (0.2982)
-- The film is okay but not very impressive. -> negative (0.2417)
+- best validation accuracy: 0.3769300636（第 4 个 epoch）
+- best validation loss: 1.4584（第 5 个 epoch）
+- final epoch(15) train_acc: 0.9171
+- final epoch(15) val_acc: 0.3669
 
 ## 6. 结果分析
 
-从结果可见，当前轻量化配置下模型已完成端到端训练、验证、测试和单句预测流程，但分类能力较弱，主要表现为多样例集中预测为 negative。
+从曲线与指标可见：
 
-主要原因：
+- 训练集性能持续提升（train_acc 从 0.2654 升至 0.9171）
+- 验证集在第 4-5 轮达到峰值后进入波动并整体退化
+- 最终训练-验证存在较大泛化差距（约 0.55），呈现明显过拟合
 
-- 训练步数截断较小（max_train_steps=5），参数更新不足
-- 模型容量较小（embedding 与 filter 数量较低）
-- 五分类任务边界细，TextCNN 在有限训练预算下容易欠拟合
+说明：
 
-后续可改进方向：
+- TextCNN 在该设置下具备较强拟合能力，但对 SST-5 细粒度类别边界的泛化有限
+- 课程实践目标（能训练、能验证、能测试、能预测、可复现）已完成
 
-- 增大训练步数与 epoch 的有效覆盖
-- 增大 embedding_dim 与 num_filters
-- 适度增加 max_len，保留更多上下文信息
+可行改进方向：
+
+- 使用 early stopping（按验证集指标在第 4-5 轮附近停止）
+- 增加正则化（更高 dropout、权重衰减）
+- 引入预训练词向量或更强的上下文编码模型
+- 进行类别混淆矩阵分析，针对易混类别优化数据与损失设计
 
 ## 7. 总结
 
-本实验已完成课程实践要求的完整闭环：
+本实验完成了 SST-5 五分类 TextCNN 的完整工程闭环：
 
-- 数据加载与编码
-- 模型前向验证
-- 训练/验证/测试
-- 模型保存与预测脚本
-- 报告与角色文档
+- 数据离线加载与编码
+- 模型训练与最佳模型保存
+- 验证/测试评估与曲线可视化
+- 单句预测脚本与可复现实验配置
 
-在当前服务器算力与网络约束下，项目达成“结构清楚、能训练、能预测、报告可交付”的实践目标。
+最终测试准确率为 0.3511。结果表明，TextCNN 可作为课程实践的可靠基线，但在细粒度情感任务上需要更强正则化与建模能力以提升泛化表现。
