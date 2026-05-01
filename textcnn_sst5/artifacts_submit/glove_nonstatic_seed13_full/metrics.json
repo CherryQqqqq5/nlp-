@@ -1,0 +1,13 @@
+{
+  "best_epoch": 12,
+  "best_val_acc": 0.43415077202543145,
+  "best_val_loss": 1.2714126286562955,
+  "test_loss": 1.263911738654607,
+  "test_acc": 0.4506787330316742,
+  "test_eval_mode": "full",
+  "test_num_batches": 9,
+  "test_num_samples": 2210,
+  "glove_coverage": 0.9967201166180758,
+  "glove_found": 8205,
+  "use_class_weights": false
+}

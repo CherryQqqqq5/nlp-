@@ -1,60 +1,49 @@
-# TextCNN SST-5 Course Practice
+# TextCNN SST-5 Final Submission
 
-This project implements a reproducible 5-class sentiment classifier on SST-5 with a high-score-oriented experiment workflow (ablation + multi-seed + detailed error analysis).
+This repository contains a reproducible 5-class sentiment classification project on SST-5 using TextCNN, with final results stored under `artifacts_submit/`.
 
 ## Task
 
-Given an English movie review sentence, classify it into:
+Given one English movie review sentence, predict one of five labels:
 
-- 0: very negative
-- 1: negative
-- 2: neutral
-- 3: positive
-- 4: very positive
+- very negative
+- negative
+- neutral
+- positive
+- very positive
 
-## Structure
+## Project Structure
 
-- `data.py`: dataset loading, tokenizer, vocabulary, GloVe loader, stats
-- `model.py`: TextCNN model with optional pretrained embedding init
-- `train.py`: training, validation, early stopping, scheduler, checkpoint, test
-- `evaluate.py`: classification report, confusion matrix, error examples
-- `predict.py`: single-sentence inference (default max_len from artifact config)
-- `utils.py`: seed and JSON utils
-- `data/sst5_hf`: offline SST-5 dataset
-- `embeddings/`: pretrained embeddings (e.g., GloVe)
-- `artifacts_hs/`: high-score sprint experiment outputs
-- `artifacts_final/`: previous full-run baseline outputs
+- `data.py`: data loading, regex tokenizer, vocab, GloVe loading, data stats
+- `model.py`: TextCNN model
+- `train.py`: training + validation + checkpoint + full final test evaluation
+- `evaluate.py`: full-test classification report / confusion matrix / error examples
+- `predict.py`: single sentence inference
+- `artifacts_submit/`: final full-run experiments (main submission artifacts)
+- `debug_ablation_step_budget/`: step-budget strategy screening artifacts (non-final)
 
-## Install
+## Environment
 
 ```bash
 cd textcnn_sst5
 pip install -r requirements.txt
 ```
 
-## Download GloVe (100d)
+## Data and Embeddings
 
-```bash
-mkdir -p embeddings
-cd embeddings
-wget -c https://downloads.cs.stanford.edu/nlp/data/glove.6B.zip
-python - <<PY
-from zipfile import ZipFile
-with ZipFile("glove.6B.zip", "r") as zf:
-    zf.extract("glove.6B.100d.txt", ".")
-print("done")
-PY
-cd ..
-```
+- Dataset: `data/sst5_hf` (offline SST-5)
+- Embedding: `embeddings/glove.6B.100d.txt`
 
-## Main Train Command (glove-non-static)
+## Main Final Experiment (full-train + full-eval)
+
+> Final experiment does **not** pass `--max_train_steps` or `--max_eval_steps`.
 
 ```bash
 python train.py \
   --dataset_name data/sst5_hf \
-  --artifact_dir artifacts_hs/glove_nonstatic \
-  --epochs 12 \
-  --batch_size 64 \
+  --artifact_dir artifacts_submit/glove_nonstatic_seed13_full \
+  --epochs 25 \
+  --batch_size 256 \
   --embed_dim 100 \
   --num_filters 100 \
   --max_len 50 \
@@ -65,44 +54,47 @@ python train.py \
   --scheduler_metric val_acc \
   --scheduler_patience 1 \
   --scheduler_factor 0.5 \
-  --early_stop_patience 3 \
+  --early_stop_patience 5 \
   --early_stop_metric val_acc \
   --glove_path embeddings/glove.6B.100d.txt \
   --freeze_embedding false \
+  --seed 13 \
   --device auto
 ```
 
-## Detailed Evaluation
+## Evaluate Final Artifact
 
 ```bash
 python evaluate.py \
-  --artifact_dir artifacts_hs/glove_nonstatic \
+  --artifact_dir artifacts_submit/glove_nonstatic_seed13_full \
   --dataset_name data/sst5_hf
 ```
 
-Outputs include:
+Generated files:
 
 - `classification_report.json`
 - `confusion_matrix.json`
 - `error_examples.json`
 
-## Predict
+## Predict (after Train + Evaluate)
 
 ```bash
 python predict.py \
-  --artifact_dir artifacts_hs/glove_nonstatic \
+  --artifact_dir artifacts_submit/glove_nonstatic_seed13_full \
   --text "This movie is absolutely wonderful and touching."
 ```
 
-## Multi-Seed Repro
+## Full Multi-Seed Repro (13 / 42 / 3407)
 
 ```bash
 for seed in 13 42 3407; do
+  out="artifacts_submit/glove_nonstatic_seed${seed}_full"
+
   python train.py \
     --dataset_name data/sst5_hf \
-    --artifact_dir artifacts_hs/multiseed/glove_nonstatic_seed${seed} \
-    --epochs 12 \
-    --batch_size 64 \
+    --artifact_dir "${out}" \
+    --epochs 25 \
+    --batch_size 256 \
     --embed_dim 100 \
     --num_filters 100 \
     --max_len 50 \
@@ -113,20 +105,21 @@ for seed in 13 42 3407; do
     --scheduler_metric val_acc \
     --scheduler_patience 1 \
     --scheduler_factor 0.5 \
-    --early_stop_patience 3 \
+    --early_stop_patience 5 \
     --early_stop_metric val_acc \
     --glove_path embeddings/glove.6B.100d.txt \
     --freeze_embedding false \
-    --seed ${seed} \
+    --seed "${seed}" \
     --device auto
 
-  python evaluate.py \
-    --artifact_dir artifacts_hs/multiseed/glove_nonstatic_seed${seed} \
-    --dataset_name data/sst5_hf
+  python evaluate.py --artifact_dir "${out}" --dataset_name data/sst5_hf
 done
 ```
 
-## Video Submission
+Then summarize from full reports (`classification_report.json`) to `artifacts_submit/multiseed_summary.json`.
 
-The 1-2 minute demo video is submitted outside this repository.
-Recommended flow: project structure -> training/evaluation results -> predict demo.
+## Metric Contract
+
+- `train.py` enforces final test as full evaluation (`max_steps=0` fixed at test stage).
+- `metrics.json` includes `test_eval_mode`, `test_num_batches`, `test_num_samples`.
+- Final reporting should use full-test metrics from `classification_report.json`.

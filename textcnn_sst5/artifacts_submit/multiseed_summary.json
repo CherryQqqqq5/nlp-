@@ -1,0 +1,50 @@
+{
+  "source_of_truth": "classification_report.json",
+  "experiment": "glove_nonstatic_full",
+  "seeds": [
+    13,
+    42,
+    3407
+  ],
+  "runs": [
+    {
+      "seed": 13,
+      "artifact_dir": "artifacts_submit/glove_nonstatic_seed13_full",
+      "best_epoch": 12,
+      "best_val_acc": 0.43415077202543145,
+      "test_acc_full": 0.4506787330316742,
+      "test_macro_f1": 0.3913558169300752,
+      "test_weighted_f1": 0.4246241696173374,
+      "metrics_test_acc": 0.4506787330316742,
+      "acc_gap": 0.0
+    },
+    {
+      "seed": 42,
+      "artifact_dir": "artifacts_submit/glove_nonstatic_seed42_full",
+      "best_epoch": 11,
+      "best_val_acc": 0.4396003633060854,
+      "test_acc_full": 0.45384615384615384,
+      "test_macro_f1": 0.4048239397759514,
+      "test_weighted_f1": 0.43303616893849667,
+      "metrics_test_acc": 0.45384615384615384,
+      "acc_gap": 0.0
+    },
+    {
+      "seed": 3407,
+      "artifact_dir": "artifacts_submit/glove_nonstatic_seed3407_full",
+      "best_epoch": 13,
+      "best_val_acc": 0.4332425068119891,
+      "test_acc_full": 0.4597285067873303,
+      "test_macro_f1": 0.4102232383611704,
+      "test_weighted_f1": 0.4384366445442038,
+      "metrics_test_acc": 0.4597285067873303,
+      "acc_gap": 0.0
+    }
+  ],
+  "test_acc_mean": 0.45475113122171945,
+  "test_acc_std": 0.003749563467467876,
+  "test_macro_f1_mean": 0.40213433168906565,
+  "test_macro_f1_std": 0.007933909990684227,
+  "test_weighted_f1_mean": 0.4320323277000126,
+  "test_weighted_f1_std": 0.005683419676297537
+}

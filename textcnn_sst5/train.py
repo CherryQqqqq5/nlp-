@@ -1,4 +1,5 @@
 import argparse
+from collections import Counter
 from pathlib import Path
 
 import matplotlib.pyplot as plt
@@ -48,8 +49,8 @@ def run_epoch(model, loader, criterion, optimizer, device, train_mode: bool, max
             break
 
     if total_count == 0:
-        return 0.0, 0.0
-    return total_loss / total_count, total_correct / total_count
+        return 0.0, 0.0, 0, 0
+    return total_loss / total_count, total_correct / total_count, steps, total_count
 
 
 def parse_args():
@@ -84,6 +85,9 @@ def parse_args():
     # pretrained embeddings
     parser.add_argument("--glove_path", type=str, default="")
     parser.add_argument("--freeze_embedding", type=str, default="false", choices=["true", "false"])
+
+    # imbalance handling
+    parser.add_argument("--use_class_weights", action="store_true")
     return parser.parse_args()
 
 
@@ -93,12 +97,26 @@ def is_improved(metric_name: str, current: float, best: float, min_delta: float)
     return current > (best + min_delta)
 
 
+def build_class_weights(train_dataset, num_classes: int, device: torch.device) -> torch.Tensor:
+    counts = Counter(int(x.item()) if hasattr(x, "item") else int(x) for x in train_dataset.labels)
+    total = sum(counts.values())
+    weights = []
+    for cid in range(num_classes):
+        c = counts.get(cid, 1)
+        weights.append(total / (num_classes * c))
+    return torch.tensor(weights, dtype=torch.float, device=device)
+
+
 def main():
     args = parse_args()
     set_seed(args.seed)
 
     artifact_dir = Path(args.artifact_dir)
     artifact_dir.mkdir(parents=True, exist_ok=True)
+
+    # Hard safety for final submit outputs: no truncated train/eval allowed.
+    if "artifacts_submit" in str(artifact_dir) and (args.max_train_steps > 0 or args.max_eval_steps > 0):
+        raise ValueError("artifacts_submit experiments must use full train/eval (max_train_steps=0 and max_eval_steps=0)")
 
     bundle = create_dataloaders(
         dataset_name=args.dataset_name,
@@ -144,7 +162,12 @@ def main():
         freeze_embedding=freeze_embedding,
     ).to(device)
 
-    criterion = nn.CrossEntropyLoss()
+    class_weights = None
+    if args.use_class_weights:
+        class_weights = build_class_weights(bundle.train_loader.dataset, len(bundle.label_names), device)
+        print("Using class weights:", [round(float(x), 4) for x in class_weights.detach().cpu().tolist()])
+
+    criterion = nn.CrossEntropyLoss(weight=class_weights)
     optimizer = AdamW(model.parameters(), lr=args.lr, weight_decay=args.weight_decay)
 
     scheduler = None
@@ -165,7 +188,6 @@ def main():
         "lr": [],
     }
 
-    # best tracking for checkpoint and early stop
     best_checkpoint_score = float("-inf")
     best_val_acc = float("-inf")
     best_val_loss = float("inf")
@@ -179,7 +201,7 @@ def main():
     print("Sanity check logits shape:", tuple(logits.shape))
 
     for epoch in range(1, args.epochs + 1):
-        train_loss, train_acc = run_epoch(
+        train_loss, train_acc, train_steps, train_count = run_epoch(
             model,
             bundle.train_loader,
             criterion,
@@ -189,7 +211,7 @@ def main():
             max_steps=args.max_train_steps,
             grad_clip=args.grad_clip,
         )
-        val_loss, val_acc = run_epoch(
+        val_loss, val_acc, val_steps, val_count = run_epoch(
             model,
             bundle.val_loader,
             criterion,
@@ -208,12 +230,13 @@ def main():
 
         print(
             f"Epoch {epoch:02d}/{args.epochs} | "
-            f"train_loss={train_loss:.4f} train_acc={train_acc:.4f} | "
-            f"val_loss={val_loss:.4f} val_acc={val_acc:.4f} | "
+            f"train_loss={train_loss:.4f} train_acc={train_acc:.4f} "
+            f"(steps={train_steps}, n={train_count}) | "
+            f"val_loss={val_loss:.4f} val_acc={val_acc:.4f} "
+            f"(steps={val_steps}, n={val_count}) | "
             f"lr={current_lr:.6f}"
         )
 
-        # checkpoint follows val_acc for backward compatibility
         if val_acc > best_val_acc:
             best_val_acc = val_acc
             best_epoch = epoch
@@ -222,7 +245,6 @@ def main():
         if val_loss < best_val_loss:
             best_val_loss = val_loss
 
-        # early stopping metric can be configured independently
         current_es_score = val_acc if args.early_stop_metric == "val_acc" else val_loss
         if best_checkpoint_score == float("-inf") and args.early_stop_metric == "val_loss":
             best_checkpoint_score = float("inf")
@@ -245,16 +267,18 @@ def main():
             break
 
     model.load_state_dict(torch.load(artifact_dir / "best_model.pt", map_location=device, weights_only=False))
-    test_loss, test_acc = run_epoch(
+
+    # Final test is always full-eval by design.
+    test_loss, test_acc, test_steps, test_count = run_epoch(
         model,
         bundle.test_loader,
         criterion,
         optimizer,
         device,
         train_mode=False,
-        max_steps=args.max_eval_steps,
+        max_steps=0,
     )
-    print(f"Test | loss={test_loss:.4f} acc={test_acc:.4f}")
+    print(f"Test | loss={test_loss:.4f} acc={test_acc:.4f} (steps={test_steps}, n={test_count})")
 
     save_json(bundle.vocab, str(artifact_dir / "vocab.json"))
     save_json(bundle.label_names, str(artifact_dir / "label_names.json"))
@@ -268,8 +292,12 @@ def main():
             "best_val_loss": best_val_loss,
             "test_loss": test_loss,
             "test_acc": test_acc,
+            "test_eval_mode": "full",
+            "test_num_batches": test_steps,
+            "test_num_samples": test_count,
             "glove_coverage": glove_coverage,
             "glove_found": glove_found,
+            "use_class_weights": args.use_class_weights,
         },
         str(artifact_dir / "metrics.json"),
     )

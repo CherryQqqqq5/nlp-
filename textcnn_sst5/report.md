@@ -1,152 +1,114 @@
-# 实验报告：TextCNN 在 SST-5 五分类情感分析中的高分冲刺实验
+# 实验报告：TextCNN 在 SST-5 五分类情感分类中的最终提交结果
 
-## 1. 任务介绍
+## 1. 任务与目标
 
-目标是完成句子级英文电影评论五分类：
+任务：对英文电影评论句子做五分类（very negative / negative / neutral / positive / very positive）。
 
-- 0: very negative
-- 1: negative
-- 2: neutral
-- 3: positive
-- 4: very positive
+本次提交的验收目标是：
 
-本次不是单次跑通，而是建立“可复现 + 可对比 + 可分析”的实验体系。
+- 最终结果必须来自 full-train + full-test（不截断）
+- 指标口径统一（`metrics.json` 与 `classification_report.json` 对齐）
+- 主结论仅引用 `artifacts_submit/` 下结果
 
-## 2. 数据集与数据统计
+## 2. 数据与预处理
 
-使用离线副本 `data/sst5_hf`（来源 `SetFit/sst5`，train/validation/test）。
+- 数据集：`data/sst5_hf`（离线 SST-5）
+- 分词：正则 tokenizer（保留标点，统一小写）
+- 词表：仅基于 train 构建，`min_freq=2`
+- 截断长度：`max_len=50`
+- 词向量：`glove.6B.100d`
 
-当前实现的数据处理要点：
+数据统计文件：`artifacts_submit/glove_nonstatic_seed13_full/data_stats.json`。
 
-- tokenizer：正则切分（保留标点，兼容 `-lrb-/-rrb-`）
-- vocab：仅基于 train 构建，`min_freq=2`
-- 序列长度：`max_len=50`
+## 3. 方法与训练策略
 
-由 `data_stats.json` 自动输出：
+模型：TextCNN (`Embedding -> Conv1d(k=3,4,5) -> MaxPool -> Concat -> Dropout -> Linear`)。
 
-- 样本量：train/val/test
-- 平均句长：`avg_train_len`, `avg_val_len`, `avg_test_len`
-- OOV 比例：`val_oov_ratio`, `test_oov_ratio`
-
-## 3. 方法
-
-### 3.1 TextCNN 结构
-
-`Embedding -> Conv1d(k=3,4,5) -> ReLU -> MaxPool -> Concat -> Dropout -> Linear(5)`
-
-关键维度变换：`[B, L, E] -> [B, E, L]`。
-
-### 3.2 Embedding 方案
-
-- `rand`: 随机初始化
-- `glove-static`: 加载 GloVe-100d，冻结 embedding
-- `glove-non-static`: 加载 GloVe-100d，允许微调
-
-GloVe 覆盖率（本词表）约为 `0.9967 (8205/8232)`。
-
-### 3.3 训练策略
-
-为抑制过拟合，训练脚本支持：
+训练策略：
 
 - `AdamW` + `weight_decay`
 - `ReduceLROnPlateau`
 - `early stopping`
-- 可选 `grad_clip`
+- 可选 `class-weighted CrossEntropyLoss`（对照实验）
+
+关键口径约束（已在代码实现）：
+
+- 最终 test 阶段固定 full-eval（`max_steps=0`）
+- `metrics.json` 写入 `test_eval_mode/test_num_batches/test_num_samples`
 
 ## 4. 实验设置
 
-### 4.1 统一设置
+统一参数（final 配置）：
 
-- dataset_name: `data/sst5_hf`
-- batch_size: 64
-- max_len: 50
-- num_filters: 100
-- kernel_sizes: (3,4,5)
-- device: auto（本次运行在 CPU）
+- `epochs=25`
+- `batch_size=256`
+- `embed_dim=100`
+- `num_filters=100`
+- `lr=5e-4`
+- `dropout=0.5`
+- `weight_decay=1e-4`
+- `early_stop_patience=5`
+- `scheduler_metric=val_acc`
 
-### 4.2 本轮对比实验说明
+设备：CPU（`--device auto` 实际选择 CPU）。
 
-本轮为了快速完成完整实验矩阵，采用了固定 step budget：
+## 5. 结果
 
-- `max_train_steps=8`
-- `max_eval_steps=4`
+### 5.1 表 1：Step-budget 策略筛选（非最终提交口径）
 
-该设置用于高效比较不同策略，不代表最终可提交的“长训练上限”。
+说明：`debug_ablation_step_budget/` 仅用于早期策略筛选，不用于最终结论。
 
-## 5. 实验结果
+| 用途 | 目录 | 是否作为最终结果 |
+|---|---|---|
+| 快速筛选 | `debug_ablation_step_budget/` | 否 |
+| 最终提交 | `artifacts_submit/` | 是 |
 
-### 5.1 Ablation 对比（单次）
+### 5.2 表 2：Final full-run 主结果（最终提交口径）
 
-| Model | Best Val Acc | Test Acc | Test Loss | Macro-F1 |
+来源：`artifacts_submit/glove_nonstatic_seed{13,42,3407}_full` 与 `artifacts_submit/multiseed_summary.json`。
+
+| Seed | Best Val Acc | Full Test Acc | Macro-F1 | Weighted-F1 |
 |---|---:|---:|---:|---:|
-| rand_baseline | 0.3242 | 0.2617 | 1.5939 | 0.2197 |
-| rand_reg (AdamW+ES+Scheduler) | 0.2891 | 0.2500 | 1.6020 | 0.1351 |
-| glove-static (100d) | 0.3516 | 0.3242 | 1.5066 | 0.1896 |
-| glove-non-static (100d) | 0.3164 | **0.3477** | 1.5391 | 0.1602 |
+| 13 | 0.4342 | 0.4507 | 0.3914 | 0.4246 |
+| 42 | 0.4396 | 0.4538 | 0.4048 | 0.4330 |
+| 3407 | 0.4332 | 0.4597 | 0.4102 | 0.4384 |
+| mean ± std | - | **0.4548 ± 0.0037** | **0.4021 ± 0.0079** | **0.4320 ± 0.0057** |
 
-结论：在本轮设置下，`glove-non-static` 取得最高 `test_acc`，`glove-static` 的 `best_val_acc` 更高。
+指标口径一致性：三组实验 `metrics.json.test_acc` 与 `classification_report.json.accuracy` 差值均为 0。
 
-### 5.2 多随机种子（glove-non-static）
+### 5.3 类别塌缩对照：class-weighted（推荐对照）
 
-Seeds: `13, 42, 3407`
+来源：
 
-单次结果：
+- baseline: `artifacts_submit/glove_nonstatic_seed13_full`
+- class-weighted: `artifacts_submit/glove_nonstatic_seed13_full_classweighted`
+- 汇总：`artifacts_submit/classweight_ablation_summary.json`
 
-- seed13: test_acc=0.3789, macro_f1=0.1897
-- seed42: test_acc=0.3477, macro_f1=0.1602
-- seed3407: test_acc=0.3008, macro_f1=0.1301
+| Setting | Full Test Acc | Macro-F1 | Weighted-F1 |
+|---|---:|---:|---:|
+| baseline | 0.4507 | 0.3914 | 0.4246 |
+| class-weighted | 0.4294 | 0.4200 | 0.4288 |
+| delta | -0.0213 | +0.0287 | +0.0042 |
 
-汇总（mean ± std）：
+少数类召回变化（class-weighted - baseline）：
 
-- `best_val_acc`: `0.3359 ± 0.0305`
-- `test_acc`: `0.3424 ± 0.0393`
-- `test_loss`: `1.5418 ± 0.0170`
-- `macro_f1`: `0.1600 ± 0.0298`
-- `weighted_f1`: `0.2104 ± 0.0360`
+- very negative: +0.2509
+- neutral: +0.0720
+- very positive: +0.1629
 
-汇总文件：
+结论：class-weighted 明显缓解少数类塌缩并提升 macro-F1，但牺牲了整体 accuracy。
 
-- `artifacts_hs/multiseed/glove_nonstatic_multiseed_summary.json`
+## 6. 结论
 
-## 6. 详细分析
+本次最终提交满足验收门槛：
 
-### 6.1 混淆矩阵特征（以 seed13 为例）
+1. 最终 test 采用 full-eval，未使用 step 截断；
+2. 主结果来自 `artifacts_submit/`，口径统一且可复现；
+3. 多 seed full-run 给出稳定均值：`Full Test Acc = 0.4548 ± 0.0037`；
+4. class-weighted 对照验证了“accuracy 与少数类鲁棒性”的权衡。
 
-从 `confusion_matrix.json` 看，模型显著偏向 `negative` 与 `positive` 两个中间强度类别：
+后续可继续尝试：
 
-- `very negative -> negative` 混淆突出
-- `very positive -> positive` 混淆突出
-- `neutral` 的召回非常低（容易被压到邻近极性）
-
-### 6.2 分类报告（seed13）
-
-- `negative` F1 较高（0.5171）
-- `positive` F1 中等（0.4061）
-- `very negative / neutral / very positive` F1 很低
-
-说明模型更容易学习“中强度情感词”，但对细粒度边界和中性语义仍不足。
-
-### 6.3 错误样例现象
-
-`error_examples.json` 显示高频错误集中在：
-
-- 弱否定、轻度褒贬、转折句
-- 强度相邻类别（very negative vs negative；positive vs very positive）
-
-## 7. 结论与下一步
-
-本次冲刺完成了高分作业应有的核心形态：
-
-- 从单结果升级为实验矩阵
-- 引入预训练词向量与训练正则化
-- 增加混淆矩阵、分类报告、错误样例
-- 给出多 seed 的统计稳定性
-
-在当前 step budget 下，最佳单次 `test_acc=0.3477`，多 seed 均值 `0.3424 ± 0.0393`。
-
-下一步若继续提分，建议：
-
-1. 去掉 step 截断并进行完整 epoch 训练；
-2. 在 `glove-static/non-static` 上扩大超参搜索（lr, dropout, weight_decay）；
-3. 增加 `glove.6B.300d` 与更强 tokenization 对照；
-4. 针对 `neutral` 类别进行类别不平衡与难例策略优化。
+- GloVe 300d 对照
+- 更强文本编码器（如 BiLSTM/Transformer）
+- 面向 neutral/very negative 的 targeted augmentation

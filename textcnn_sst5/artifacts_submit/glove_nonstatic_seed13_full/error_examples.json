@@ -1,0 +1,839 @@
+[
+  {
+    "true_label": "very negative",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "a gob of drivel so sickly sweet , even the eager consumers of moore 's pasteurized ditties will retch it up like rancid crème brûlée .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3709559440612793
+      },
+      {
+        "text": "gangs of new york is an unapologetic mess , whose only saving grace is that it ends by blowing just about everything up .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.39420756697654724
+      },
+      {
+        "text": "if this holiday movie is supposed to be a gift , somebody unwrapped it early , took out all the good stuff , and left behind the crap -lrb- literally -rrb- .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.40956947207450867
+      },
+      {
+        "text": "when a set of pre-shooting guidelines a director came up with for his actors turns out to be cleverer , better written and of considerable more interest than the finished film , that 's a bad sign .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.48998725414276123
+      },
+      {
+        "text": "any one episode of the sopranos would send this ill-conceived folly to sleep with the fishes .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.5072064399719238
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "so relentlessly wholesome it made me want to swipe something .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3799838125705719
+      },
+      {
+        "text": "a reasonably efficient mechanism , but it offers few surprises and finds its stars slumming in territory they should have avoided .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.5469606518745422
+      },
+      {
+        "text": "it ultimately stands forth as an important chronicle of the abuses of one of latin america 's most oppressive regimes .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3882176876068115
+      },
+      {
+        "text": "ferrara directs the entire film with the kind of detachment that makes any given frame look like a family 's custom-made christmas card .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3365788459777832
+      },
+      {
+        "text": "too sincere to exploit its subjects and too honest to manipulate its audience .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3457816541194916
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "we never really feel involved with the story , as all of its ideas remain just that : abstract ideas .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3408513069152832
+      },
+      {
+        "text": "without a strong script and energetic acting , dogma films can produce the same sleep-inducing effects as watching your neighbor 's home videos .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.36397531628608704
+      },
+      {
+        "text": "the backyard battles you staged with your green plastic army men were more exciting and almost certainly made more sense .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3991798162460327
+      },
+      {
+        "text": "it is a comedy that 's not very funny and an action movie that is not very thrilling -lrb- and an uneasy alliance , at that -rrb- .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.41778695583343506
+      },
+      {
+        "text": "flaccid drama and exasperatingly slow journey .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3904636800289154
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "neutral",
+    "count": 5,
+    "examples": [
+      {
+        "text": "acting , particularly by tambor , almost makes `` never again '' worthwhile , but -lrb- writer\\/director -rrb- schaeffer should follow his titular advice",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3668478727340698
+      },
+      {
+        "text": "those who managed to avoid the deconstructionist theorizing of french philosopher jacques derrida in college can now take an 85-minute brush-up course with the documentary derrida .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3180350363254547
+      },
+      {
+        "text": "a well acted and well intentioned snoozer .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.24251773953437805
+      },
+      {
+        "text": "not so much a movie as a picture book for the big screen .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.2592117190361023
+      },
+      {
+        "text": "enough similarities to gymkata and howie long 's firestorm that my fingernails instinctively crawled towards my long-suffering eyeballs .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.2999219596385956
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "very negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "even as lame horror flicks go , this is lame .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.50811368227005
+      },
+      {
+        "text": "instead of accurately accounting a terrible true story , the film 's more determined to become the next texas chainsaw massacre .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.297858864068985
+      },
+      {
+        "text": "not ` terrible filmmaking ' bad , but more like , ' i once had a nightmare like this , and it 's now coming true ' bad .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.5300264954566956
+      },
+      {
+        "text": "arguably the year 's silliest and most incoherent movie .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.47581085562705994
+      },
+      {
+        "text": "static , repetitive , muddy and blurry , hey arnold !",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.5474186539649963
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "though the violence is far less sadistic than usual , the film is typical miike : fast , furious and full of off-the-cuff imaginative flourishes .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.32513919472694397
+      },
+      {
+        "text": "all the performances are top notch and , once you get through the accents , all or nothing becomes an emotional , though still positive , wrench of a sit .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3131519854068756
+      },
+      {
+        "text": "much monkeyfun for all .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.29756733775138855
+      },
+      {
+        "text": "it represents better-than-average movie-making that does n't demand a dumb , distracted audience .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.4117799401283264
+      },
+      {
+        "text": "if it 's possible for a sequel to outshine the original , then sl2 does just that .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.41530418395996094
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "william shatner , as a pompous professor , is the sole bright spot ...",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.39033403992652893
+      },
+      {
+        "text": "d.j. qualls as indiana jones ?",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.40254709124565125
+      },
+      {
+        "text": "this is really just another genre picture .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.3519960045814514
+      },
+      {
+        "text": "a heavy reliance on cgi technology is beginning to creep into the series .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.6355748176574707
+      },
+      {
+        "text": "dissing a bond movie is quite like calling a dog stupid , but when it has the temerity to run over two hours , you feel like winding up with a kick .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.4422580897808075
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "the passions aroused by the discord between old and new cultures are set against the strange , stark beauty of the mideast desert , so lovingly and perceptively filmed that you can almost taste the desiccated air .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.5482506155967712
+      },
+      {
+        "text": "it 's a pleasure to see seinfeld griping about the biz with buddies chris rock , garry shandling and colin quinn .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.35333529114723206
+      },
+      {
+        "text": "as a singular character study , it 's perfect .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.48205825686454773
+      },
+      {
+        "text": "much of the way , though , this is a refreshingly novel ride .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.4965081214904785
+      },
+      {
+        "text": "everything you loved about it in 1982 is still there , for everybody who wants to be a kid again , or show it to their own kids .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.30800047516822815
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "negative",
+    "count": 5,
+    "examples": [
+      {
+        "text": "if your senses have n't been dulled by slasher films and gorefests , if you 're a connoisseur of psychological horror , this is your ticket .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.4012862741947174
+      },
+      {
+        "text": "steve irwin 's method is ernest hemmingway at accelerated speed and volume .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.327963650226593
+      },
+      {
+        "text": "a harmless and mildly amusing family comedy .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.2879449129104614
+      },
+      {
+        "text": "if it tried to do anything more , it would fail and perhaps explode , but at this level of manic whimsy , it is just about right .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.4924529492855072
+      },
+      {
+        "text": "sometimes , nothing satisfies like old-fashioned swashbuckling .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 1,
+        "pred_label": "negative",
+        "confidence": 0.4051521122455597
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "but what saves lives on the freeway does not necessarily make for persuasive viewing .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.4159190356731415
+      },
+      {
+        "text": "culkin exudes none of the charm or charisma that might keep a more general audience even vaguely interested in his bratty character .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.4329519271850586
+      },
+      {
+        "text": "as it abruptly crosscuts among the five friends , it fails to lend the characters ' individual stories enough dramatic resonance to make us care about them .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.40669211745262146
+      },
+      {
+        "text": "as are its star , its attitude and its obliviousness .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.3957642614841461
+      },
+      {
+        "text": "about as satisfying and predictable as the fare at your local drive through .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 3,
+        "pred_label": "positive",
+        "confidence": 0.38267090916633606
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "neutral",
+    "count": 5,
+    "examples": [
+      {
+        "text": "not a cozy or ingratiating work , but it 's challenging , sometimes clever , and always interesting , and those are reasons enough to see it .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3539222180843353
+      },
+      {
+        "text": "for the first time in several years , mr. allen has surpassed himself with the magic he 's spun with the hollywood empress of ms. leoni 's ellie .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.38806042075157166
+      },
+      {
+        "text": "as lo-fi as the special effects are , the folks who cobbled nemesis together indulge the force of humanity over hardware in a way that george lucas has long forgotten .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3287229835987091
+      },
+      {
+        "text": "here 's a british flick gleefully unconcerned with plausibility , yet just as determined to entertain you .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.30180996656417847
+      },
+      {
+        "text": "you have to pay attention to follow all the stories , but they 're each interesting .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3871817886829376
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "very positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "an enthralling , playful film that constantly frustrates our desire to know the ` truth ' about this man , while deconstructing the very format of the biography in a manner that derrida would doubtless give his blessing to .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.4669746160507202
+      },
+      {
+        "text": "-lrb- schweiger is -rrb- talented and terribly charismatic , qualities essential to both movie stars and social anarchists .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5086677074432373
+      },
+      {
+        "text": "a well-made and often lovely depiction of the mysteries of friendship .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5260581374168396
+      },
+      {
+        "text": "a thoughtful , moving piece that faces difficult issues with honesty and beauty .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.6087235808372498
+      },
+      {
+        "text": "it 's both a necessary political work and a fascinating documentary ...",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.656304657459259
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "very positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "sensitive though not quite revelatory documentary .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.4472798705101013
+      },
+      {
+        "text": "a well-made , thoughtful , well-acted clunker , but a clunker nonetheless .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5338984727859497
+      },
+      {
+        "text": "enduring love but exhausting cinema .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5485168099403381
+      },
+      {
+        "text": "you see robert de niro singing - and dancing to - west side story show tunes .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5283405184745789
+      },
+      {
+        "text": "the ending does leave you unfulfilled , but these are performances to enjoy in a memorable ensemble piece .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.4726128578186035
+      }
+    ]
+  },
+  {
+    "true_label": "very positive",
+    "pred_label": "neutral",
+    "count": 5,
+    "examples": [
+      {
+        "text": "it 's one of the saddest films i have ever seen that still manages to be uplifting but not overly sentimental .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.35384511947631836
+      },
+      {
+        "text": "the film 's greatest asset is how much it 's not just another connect-the-dots , spy-on-the-run picture .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3457351326942444
+      },
+      {
+        "text": "workmanlike , maybe , but still a film with all the elements that made the other three great , scary times at the movies .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3199850022792816
+      },
+      {
+        "text": "few films this year have been as resolute in their emotional nakedness .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.35131898522377014
+      },
+      {
+        "text": "with the film 's striking ending , one realizes that we have a long way to go before we fully understand all the sexual permutations involved .",
+        "true_id": 4,
+        "true_label": "very positive",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3692186772823334
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "neutral",
+    "count": 5,
+    "examples": [
+      {
+        "text": "` enigma ' is a good name for a movie this delibrately obtuse and unapproachable .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.27823740243911743
+      },
+      {
+        "text": "`` an entire film about researchers quietly reading dusty old letters . ''",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3162000775337219
+      },
+      {
+        "text": "do we really need a 77-minute film to tell us exactly why a romantic relationship between a 15-year-old boy and a 40-year-old woman does n't work ?",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.3526121973991394
+      },
+      {
+        "text": "neither funny nor suspenseful nor particularly well-drawn .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.35194870829582214
+      },
+      {
+        "text": "so what is the point ?",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 2,
+        "pred_label": "neutral",
+        "confidence": 0.4074361324310303
+      }
+    ]
+  },
+  {
+    "true_label": "negative",
+    "pred_label": "very positive",
+    "count": 5,
+    "examples": [
+      {
+        "text": "there are films that try the patience of even the most cinema-besotted critic -- and this was one of them .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.3906739056110382
+      },
+      {
+        "text": "a very average science fiction film .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.45565566420555115
+      },
+      {
+        "text": "while benigni -lrb- who stars and co-wrote -rrb- seems to be having a wonderful time , he might be alone in that .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5194700956344604
+      },
+      {
+        "text": "flat , but with a revelatory performance by michelle williams .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.5331214666366577
+      },
+      {
+        "text": "my response to the film is best described as lukewarm .",
+        "true_id": 1,
+        "true_label": "negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.4260540008544922
+      }
+    ]
+  },
+  {
+    "true_label": "neutral",
+    "pred_label": "very negative",
+    "count": 4,
+    "examples": [
+      {
+        "text": "there 's no way to sort out the mess in our heads and deconstruct where it all went wrong .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.43789350986480713
+      },
+      {
+        "text": "maybe it 's just because this past year has seen the release of some of the worst film comedies in decades ... but honestly , analyze that really is n't all that bad .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.4912515878677368
+      },
+      {
+        "text": "light , cute and forgettable .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.34513670206069946
+      },
+      {
+        "text": "this boisterous comedy serves up a cruel reminder of the fate of hundreds of thousands of chinese , one which can only qualify as a terrible tragedy .",
+        "true_id": 2,
+        "true_label": "neutral",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.34257322549819946
+      }
+    ]
+  },
+  {
+    "true_label": "positive",
+    "pred_label": "very negative",
+    "count": 3,
+    "examples": [
+      {
+        "text": "works because , for the most part , it avoids the stupid cliches and formulaic potholes that befall its brethren .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.5003139972686768
+      },
+      {
+        "text": "the film is just a big , gorgeous , mind-blowing , breath-taking mess .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.25764739513397217
+      },
+      {
+        "text": "a whole lot foul , freaky and funny .",
+        "true_id": 3,
+        "true_label": "positive",
+        "pred_id": 0,
+        "pred_label": "very negative",
+        "confidence": 0.4761272668838501
+      }
+    ]
+  },
+  {
+    "true_label": "very negative",
+    "pred_label": "very positive",
+    "count": 1,
+    "examples": [
+      {
+        "text": "a waste of good performances .",
+        "true_id": 0,
+        "true_label": "very negative",
+        "pred_id": 4,
+        "pred_label": "very positive",
+        "confidence": 0.4230731725692749
+      }
+    ]
+  }
+]
